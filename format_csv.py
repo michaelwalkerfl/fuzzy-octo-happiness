@@ -6,8 +6,9 @@ def dedupe(seq):
     return [i for i in seq if i not in present and not present_add(i)]
 
 class FormatFile(sublime_plugin.TextCommand):
-    def read_line(self, row):
+    def run(self, edit):
         view = self.view
-        text = view.text(row, 0)
-        line = view.line(text)
-        return view.substr(line)
+        region = Region(0L, view.size())
+        original = StringIO(view.substr(region))
+        new = StringIO() + ",,"
+        view.replace(edit, region, new.getvalue())

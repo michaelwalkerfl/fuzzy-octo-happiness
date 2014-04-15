@@ -1,4 +1,5 @@
 import sublime, sublime_plugin
+from StringIO import StringIO
 
 def dedupe(seq):
     present = set()
